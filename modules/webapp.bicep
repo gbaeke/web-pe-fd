@@ -50,3 +50,5 @@ resource webapp 'Microsoft.Web/sites@2021-01-01'={
 
 output appHostName string = webapp.properties.defaultHostName
 output appServiceResourceId string = webapp.id
+// see https://github.com/gbaeke/web-pe-fd/issues/1
+// output ip string = webpe.properties.networkInterfaces[0].properties.ipConfigurations[0].properties.privateIPAddress
