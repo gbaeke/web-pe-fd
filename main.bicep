@@ -41,25 +41,26 @@ module vm 'modules/vm.bicep'={
   
 }
 
+module privateDns 'modules/dns.bicep'={
+  scope: rg
+  name: 'privateDns'
+  params: {
+    vnetId: vnet.outputs.id
+  }
+  
+}
+
 module webapp 'modules/webapp.bicep'={
   scope: rg
   name: 'web-geba'
   params: {
     defaultSubnet: vnet.outputs.defaultSubnetId
+    dnsZoneId: privateDns.outputs.id
   }
   
 }
 
-module privateDns 'modules/dns.bicep'={
-  scope: rg
-  name: 'privateDns'
-  params: {
-    ipAddress: '10.0.1.5'
-    vnetId: vnet.outputs.id
-    webappName: webapp.name
-  }
-  
-}
+
 
 module frontDoor 'modules/frontdoor.bicep'={
   scope: rg

@@ -1,5 +1,5 @@
 param defaultSubnet string
-
+param dnsZoneId string
 
 
 resource webpe 'Microsoft.Network/privateEndpoints@2021-02-01'={
@@ -18,6 +18,21 @@ resource webpe 'Microsoft.Network/privateEndpoints@2021-02-01'={
             'sites'
           ]
 
+        }
+      }
+    ]
+  }
+  
+}
+
+resource dnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2021-02-01'={
+  name: 'pe-web/web-geba'
+  properties: {
+    privateDnsZoneConfigs:[
+      {
+        name: 'config1'
+        properties: {
+          privateDnsZoneId: dnsZoneId
         }
       }
     ]
