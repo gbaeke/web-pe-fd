@@ -1,5 +1,5 @@
 param defaultSubnet string
-
+param dnsZoneId string
 
 
 resource webpe 'Microsoft.Network/privateEndpoints@2021-02-01'={
@@ -18,6 +18,21 @@ resource webpe 'Microsoft.Network/privateEndpoints@2021-02-01'={
             'sites'
           ]
 
+        }
+      }
+    ]
+  }
+  
+}
+
+resource dnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2021-02-01'={
+  name: 'pe-web/web-geba'
+  properties: {
+    privateDnsZoneConfigs:[
+      {
+        name: 'config1'
+        properties: {
+          privateDnsZoneId: dnsZoneId
         }
       }
     ]
@@ -50,5 +65,3 @@ resource webapp 'Microsoft.Web/sites@2021-01-01'={
 
 output appHostName string = webapp.properties.defaultHostName
 output appServiceResourceId string = webapp.id
-// see https://github.com/gbaeke/web-pe-fd/issues/1
-// output ip string = webpe.properties.networkInterfaces[0].properties.ipConfigurations[0].properties.privateIPAddress
