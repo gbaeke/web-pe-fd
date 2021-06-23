@@ -25,8 +25,13 @@ resource webpe 'Microsoft.Network/privateEndpoints@2021-02-01'={
   
 }
 
+// should declare this inside pe-web to not require dependsOn
+// or use '${webpe.name}/web-geba in the name
 resource dnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2021-02-01'={
   name: 'pe-web/web-geba'
+  dependsOn: [
+    webpe
+  ]
   properties: {
     privateDnsZoneConfigs:[
       {
