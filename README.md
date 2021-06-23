@@ -7,3 +7,5 @@ az deployment sub create --location eastus --template-file main.bicep --paramete
 ```
 
 Front Door deployment based on: https://github.com/Azure/azure-quickstart-templates/tree/master/201-front-door-premium-app-service-private-link
+
+Video: https://www.youtube.com/watch?v=yRIC2U-Vnts
